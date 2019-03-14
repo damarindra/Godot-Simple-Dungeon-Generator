@@ -8,8 +8,8 @@ export var min_room_size = 8
 export var max_room_size = 20
 export var spread_radius = 10
 export var cull_ratio = 0.7
-export var margin_room = 1
-export var non_margin_room_chance = 0.5
+export var shrink_room_size = 1
+export var non_shrink_room_chance = 0.5
 export var keep_connection = 0.1
 
 var room_list : Array = []
@@ -109,9 +109,9 @@ func cull_rooms():
 	room_list.sort_custom(self, "sort_rooms_from_position")
 	
 	for r in room_list:
-		if randf() > non_margin_room_chance:
-			r.rect.position += Vector2(margin_room, margin_room)
-			r.rect.size -= Vector2(margin_room * 2, margin_room * 2)
+		if randf() > non_shrink_room_chance:
+			r.rect.position += Vector2(shrink_room_size, shrink_room_size)
+			r.rect.size -= Vector2(shrink_room_size * 2, shrink_room_size * 2)
 
 
 func connect_rooms():
@@ -224,10 +224,11 @@ func create_corridors():
 			var c1 = Rect2((c.end), Vector2(3,3))
 			if x_diff > 0:
 				c.size.x += 3
-			if x_diff < 0:
+			elif x_diff < 0:
 				c.position.x -= 1
 			if y_diff < 0:
 				c1.position.y -= 1
+			elif y_diff > 0: y_diff -= 3
 			c1.size.y = y_diff
 			corridors.push_back(c1)
 			

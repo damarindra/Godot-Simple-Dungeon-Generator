@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/RoomGenerator.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/CameraMoveDebug.gd" type="Script" id=2]
-[ext_resource path="res://Sprites/PixelPackTOPDOWN8BIT.png" type="Texture" id=3]
-[ext_resource path="res://Scenes/new_tileset.tres" type="TileSet" id=4]
-[ext_resource path="res://Scripts/DGDriver.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/new_tileset.tres" type="TileSet" id=3]
+[ext_resource path="res://Scripts/DGDriver.gd" type="Script" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -15,7 +14,6 @@ script = ExtResource( 1 )
 room_count = 13
 max_room_size = 15
 cull_ratio = 0.3
-non_margin_room_chance = 0.3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -25,16 +23,11 @@ drag_margin_right = 0.0
 drag_margin_bottom = 0.0
 script = ExtResource( 2 )
 
-[node name="PixelPackTOPDOWN8BIT" type="Sprite" parent="."]
-visible = false
-position = Vector2( 1058.32, 383.911 )
-texture = ExtResource( 3 )
-
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = ExtResource( 4 )
+tile_set = ExtResource( 3 )
 cell_size = Vector2( 16, 16 )
 format = 1
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 dungeon_generator_path = NodePath("..")
-tileset = ExtResource( 4 )
+tileset = ExtResource( 3 )
 
