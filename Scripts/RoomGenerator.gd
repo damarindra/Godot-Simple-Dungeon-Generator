@@ -40,7 +40,7 @@ func _draw():
 	for c in corridors:
 		draw_rect(c, Color.yellow, false)
 
-func _process(delta):
+func _process(_delta):
 	if !debug:
 		return
 	update()
@@ -178,13 +178,7 @@ func connect_rooms():
 			check_connection.push_back(closest_con)
 			spanning_tree.push_back(Delaunay.Edge.new(closest_pair, closest_point))
 		else: break
-	
-	var con_count = 0
-	for c in connection:
-		con_count += c.connected_room.size()
-	
-	var keep_connection_count = floor(con_count * keep_connection)
-	
+		
 	for c in connection:
 		var closest_distance = INF
 		var closest_point : Vector2 = Vector2()
@@ -329,9 +323,9 @@ class Room:
 	func round_position() -> void:
 		rect.position = Vector2(round(rect.position.x), round(rect.position.y))
 	
-	func shift(var x : int, var y : int) -> void:
-		rect.position.x += x
-		rect.position.y += y
+	func shift(var shift_x : int, var shift_y : int) -> void:
+		rect.position.x += shift_x
+		rect.position.y += shift_y
 	
 	func random_in_circle_unit() -> Vector2:
 		var _rf = randf()
